@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://b2b-gym-setup-contract-backend.onrender.com/api/:path*"
+      "destination": "https://internship-nethi-mallikarjuna-guptha.onrender.com/api/:path*"
     },
     {
       "source": "/(.*)",
