@@ -41,6 +41,15 @@ pool.query('SELECT NOW()', async (err, res) => {
         }
       } else {
         console.log('Database tables exist. Skipping schema initialization.');
+        
+        // Repair invalid default password hash if present
+        const fixHashRes = await pool.query(
+          "UPDATE users SET password = $1 WHERE password = $2",
+          ['$2a$10$AwlqbEaBVE9s9GjUAi9WruYw8vZ4h1ttONuvWFwwYTV0L69Bi3LCa', '$2a$10$phqR1E2GkHj6QeK95Tq1euVf.7jHmW841UjDugK/0Q3K0Y.2oR81a']
+        );
+        if (fixHashRes.rowCount > 0) {
+          console.log(`Successfully repaired ${fixHashRes.rowCount} default user password hashes.`);
+        }
       }
     } catch (dbErr) {
       console.error('Error during database auto-initialization:', dbErr.message);

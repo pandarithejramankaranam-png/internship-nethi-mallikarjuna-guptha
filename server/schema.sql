@@ -44,11 +44,11 @@ CREATE TABLE activities (
 );
 
 -- Seed Default Users (Password is 'password123')
--- Bcrypt hash: $2a$10$phqR1E2GkHj6QeK95Tq1euVf.7jHmW841UjDugK/0Q3K0Y.2oR81a
+-- Bcrypt hash: $2a$10$AwlqbEaBVE9s9GjUAi9WruYw8vZ4h1ttONuvWFwwYTV0L69Bi3LCa
 INSERT INTO users (name, email, password, role) VALUES 
-('Dev Admin', 'admin@ironforge.com', '$2a$10$phqR1E2GkHj6QeK95Tq1euVf.7jHmW841UjDugK/0Q3K0Y.2oR81a', 'Admin'),
-('Sarah Manager', 'manager@ironforge.com', '$2a$10$phqR1E2GkHj6QeK95Tq1euVf.7jHmW841UjDugK/0Q3K0Y.2oR81a', 'Manager'),
-('Robert Staff', 'staff@ironforge.com', '$2a$10$phqR1E2GkHj6QeK95Tq1euVf.7jHmW841UjDugK/0Q3K0Y.2oR81a', 'Staff');
+('Dev Admin', 'admin@ironforge.com', '$2a$10$AwlqbEaBVE9s9GjUAi9WruYw8vZ4h1ttONuvWFwwYTV0L69Bi3LCa', 'Admin'),
+('Sarah Manager', 'manager@ironforge.com', '$2a$10$AwlqbEaBVE9s9GjUAi9WruYw8vZ4h1ttONuvWFwwYTV0L69Bi3LCa', 'Manager'),
+('Robert Staff', 'staff@ironforge.com', '$2a$10$AwlqbEaBVE9s9GjUAi9WruYw8vZ4h1ttONuvWFwwYTV0L69Bi3LCa', 'Staff');
 
 -- Seed Mock Contracts (matching mockData.js)
 INSERT INTO contracts (contract_id, client_name, client_type, contact_person, phone_number, email, project_scope, equipment_list, delivery_date, installation_date, contract_value, payment_milestone, support_terms, status, payments) VALUES
