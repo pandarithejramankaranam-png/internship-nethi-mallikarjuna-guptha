@@ -18,6 +18,43 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
+// Debug endpoint
+app.get('/api/debug/db-status', async (req, res) => {
+  try {
+    const tablesRes = await pool.query(`
+      SELECT table_name 
+      FROM information_schema.tables 
+      WHERE table_schema = 'public'
+    `);
+    const tables = tablesRes.rows.map(r => r.table_name);
+    
+    const status = {};
+    for (const table of tables) {
+      const countRes = await pool.query(`SELECT COUNT(*) FROM "${table}"`);
+      status[table] = parseInt(countRes.rows[0].count);
+    }
+    
+    let users = [];
+    if (tables.includes('users')) {
+      const usersRes = await pool.query('SELECT id, name, email, role FROM users');
+      users = usersRes.rows;
+    }
+    
+    res.json({
+      status: 'success',
+      tables,
+      counts: status,
+      users
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      message: err.message,
+      stack: err.stack
+    });
+  }
+});
+
 // Rate Limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
